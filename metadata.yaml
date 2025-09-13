@@ -1,0 +1,32 @@
+---
+title: "Example PDF from Multiple Markdown Files"
+subtitle: "This is the subtitle"
+author: "The Author"
+date: "\\today"
+bibliography: references.bib
+toc-title: "Inhalt"
+toc: true
+toc-depth: 3
+
+lof: true
+lot: true
+
+thanks: |
+  Special thanks to [Somebody](https://example.com) for their support.
+
+#abstract: |
+#  Direct abstract text 
+#  more ..
+
+# Tell the Lua filter where to read the abstract from
+abstract-title: "Zusammenfassung"
+abstract-file: abstract.md
+
+biblio-style: "apalike"
+biblio-title: "Refs"
+
+# some styling options
+linkcolor: "blue"
+
+
+---

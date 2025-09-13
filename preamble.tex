@@ -1,0 +1,49 @@
+% (leave as-is) -- file used AFTER the ToC
+% nothing to add here; TOC pages are already forced empty in preamble hooks
+
+
+\usepackage[a4paper,margin=25mm]{geometry}
+
+% Fonts (LuaLaTeX): TeX Gyre families ship with TeX Live/MiKTeX
+\usepackage{fontspec}
+\setmainfont{Roboto}
+\setsansfont{Roboto}
+\setmonofont{TeX Gyre Cursor}
+
+% Headings sizing
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{3ex plus .5ex minus .2ex}{1ex}
+\titlespacing*{\subsection}{0pt}{2.5ex plus .5ex minus .2ex}{0.8ex}
+\titlespacing*{\subsubsection}{0pt}{2ex plus .5ex minus .2ex}{0.6ex}
+
+% Make sure this is in the preamble
+\usepackage{abstract}           % safe with article/report/book/KOMA
+% \renewcommand{\abstractname}{Executive Summary}  % <-- your custom title
+\renewcommand{\abstractname}{}  % <-- your custom title
+
+
+% TOC formatting (optional, simple)
+\usepackage{tocloft}
+\setlength{\cftbeforesecskip}{2pt}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+% Page style: fully empty for all front matter; numbers gobbled
+\pagestyle{empty}
+\pagenumbering{gobble}
+
+% Page break before each H1 (# -> \section in article)
+\usepackage{etoolbox}
+\pretocmd{\section}{\clearpage}{}{}
+
+% Make sure TOC page(s) are empty even if a template changes pagestyle
+\makeatletter
+\@ifundefined{AddToHook}{%
+  % Fallback: lightly patch \tableofcontents to enforce empty style
+  \pretocmd{\tableofcontents}{\pagestyle{empty}\thispagestyle{empty}}{}{}%
+}{%
+  \AddToHook{cmd/tableofcontents/before}{\pagestyle{empty}\thispagestyle{empty}}%
+}
+\makeatother
